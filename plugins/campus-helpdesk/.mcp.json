@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "campus-helpdesk": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "${CLAUDE_PLUGIN_ROOT}/servers/campus-helpdesk-mcp.mjs"
+      ],
+      "env": {
+        "CAMPUS_DATA_DIR": "${CLAUDE_PLUGIN_ROOT}/data"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "campus-helpdesk-mcp",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "description": "Nimbus Labs Campus Helpdesk MCP Server over stdio",
+  "main": "dist/index.js",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "build:tsc": "tsc",
+    "build:bundle": "node scripts/bundle-plugin.mjs",
+    "build": "npm run typecheck && npm run build:tsc && npm run build:bundle",
+    "test": "node --import tsx --test tests/*.test.ts",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "zod": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "esbuild": "^0.25.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.8.0"
+  }
+}
