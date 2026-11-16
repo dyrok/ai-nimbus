@@ -18,11 +18,10 @@ tmp/
 scratch/
 .inspector/
 
-# Temporary PNG/preview renders & ready-to-upload submission bundle
+# Temporary PNG/preview renders
 page-*.png
 *.preview.png
 preview/
-submission/
 
 # Explicitly keep self-contained plugin runtime artifacts tracked
 !plugins/campus-helpdesk/servers/
