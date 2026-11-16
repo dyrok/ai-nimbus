@@ -1,0 +1,8 @@
+event_id,term,start_date,end_date,category,title,classes_held,notes
+CAL-2026-01,Fall-2026,2026-08-03,2026-08-03,INSTRUCTION,Fall 2026 Instruction Begins,true,Synthetic term start for CSE-A CSE-B ECE-A AI-DS-A
+CAL-2026-02,Fall-2026,2026-08-15,2026-08-15,HOLIDAY,Campus Independence Day Holiday,false,Academic blocks closed; hostel mess regular hours
+CAL-2026-03,Fall-2026,2026-09-28,2026-10-03,EXAM,Mid-Semester Assessment Window,false,Regular lectures suspended during midterm slots
+CAL-2026-04,Fall-2026,2026-10-02,2026-10-02,HOLIDAY,National Public Holiday,false,No examinations or classes scheduled
+CAL-2026-05,Fall-2026,2026-11-09,2026-11-11,BREAK,Mid-Term Academic Break,false,Library open 09:00-18:00 IST
+CAL-2026-06,Fall-2026,2026-11-27,2026-11-27,INSTRUCTION,Last Day of Fall 2026 Lectures,true,Final attendance lock at 17:30 IST
+CAL-2026-07,Fall-2026,2026-12-07,2026-12-18,EXAM,End-Semester Examinations,false,Published synthetic schedule window only
