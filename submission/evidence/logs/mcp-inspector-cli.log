@@ -1,0 +1,128 @@
+=== MCP INSPECTOR CLI (v1.0.0): tools/list (--strict) ===
+[2026-11-16T20:07:45.831Z] [nimbus:info] server.ready {"transport":"stdio","pid":80004}
+{
+  "tools": [
+    {
+      "name": "get_timetable",
+      "title": "Get Campus Timetable",
+      "description": "Look up verified Fall-2026 class schedules in Asia/Kolkata (IST) for a student batch (CSE-A, CSE-B, ECE-A, AI-DS-A) and day of the week from read-only synthetic campus fixtures.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "batch": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Student batch identifier, e.g. CSE-A, CSE-B, ECE-A, AI-DS-A"
+          },
+          "day": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Day of the week, e.g. Monday, Tue, Friday"
+          }
+        },
+        "required": [
+          "batch",
+          "day"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    },
+    {
+      "name": "get_fee_status",
+      "title": "Get Student Fee Status",
+      "description": "Look up read-only Fall-2026 synthetic tuition and hostel fee clearance details for a single student ID formatted as STU-YYYY-NNN.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "student_id": {
+            "type": "string",
+            "pattern": "^STU-\\d{4}-\\d{3}$",
+            "description": "Canonical student ID formatted as STU-YYYY-NNN, e.g. STU-2026-001"
+          }
+        },
+        "required": [
+          "student_id"
+        ],
+        "$schema": "http://json-schema.org/draft-07/schema#",
+        "additionalProperties": false
+      },
+      "annotations": {
+        "readOnlyHint": true,
+        "destructiveHint": false,
+        "idempotentHint": true,
+        "openWorldHint": false
+      },
+      "execution": {
+        "taskSupport": "forbidden"
+      }
+    }
+  ]
+}
+
+=== MCP INSPECTOR CLI (v1.0.0): tools/call get_timetable(CSE-A, Monday) ===
+[2026-11-16T20:07:46.815Z] [nimbus:info] server.ready {"transport":"stdio","pid":80052}
+[2026-11-16T20:07:46.832Z] [nimbus:info] tool.get_timetable.ok {"batch":"CSE-A","day":"Monday","count":3}
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"batch\":\"CSE-A\",\"day\":\"Monday\",\"timezone\":\"Asia/Kolkata (IST)\",\"count\":3,\"classes\":[{\"start_time\":\"09:00\",\"end_time\":\"09:50\",\"course_code\":\"CS-301\",\"course_title\":\"Distributed Systems\",\"session_type\":\"LECTURE\",\"room\":\"LH-204\",\"instructor\":\"Dr. A. Kulkarni\",\"credits\":4,\"term\":\"Fall-2026\"},{\"start_time\":\"10:00\",\"end_time\":\"10:50\",\"course_code\":\"CS-305\",\"course_title\":\"Compiler Design\",\"session_type\":\"LECTURE\",\"room\":\"LH-102\",\"instructor\":\"Prof. R. Nair\",\"credits\":4,\"term\":\"Fall-2026\"},{\"start_time\":\"14:00\",\"end_time\":\"16:50\",\"course_code\":\"CS-301L\",\"course_title\":\"Distributed Systems Lab\",\"session_type\":\"LAB\",\"room\":\"LAB-3B\",\"instructor\":\"Dr. A. Kulkarni\",\"credits\":2,\"term\":\"Fall-2026\"}]}"
+    }
+  ],
+  "isError": false
+}
+
+=== MCP INSPECTOR CLI (v1.0.0): tools/call get_fee_status(STU-2026-002) ===
+[2026-11-16T20:07:47.451Z] [nimbus:info] server.ready {"transport":"stdio","pid":80100}
+[2026-11-16T20:07:47.462Z] [nimbus:info] tool.get_fee_status.ok {"student_id":"STU-2026-002","status":"PARTIAL"}
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"student_id\":\"STU-2026-002\",\"student_name\":\"Diya Nair\",\"batch\":\"CSE-B\",\"term\":\"Fall-2026\",\"status\":\"PARTIAL\",\"currency\":\"INR\",\"total_inr\":125000,\"tuition_inr\":90000,\"hostel_inr\":35000,\"late_fee_inr\":0,\"paid_inr\":75000,\"balance_inr\":50000,\"due_date\":\"2026-11-30\",\"last_payment_ref\":\"MOCK-PAY-2026-1042\"}"
+    }
+  ],
+  "isError": false
+}
+
+=== MCP INSPECTOR CLI (v1.0.0): resources/read (campus://hostel-rules) ===
+[2026-11-16T20:07:48.349Z] [nimbus:info] server.ready {"transport":"stdio","pid":80148}
+[2026-11-16T20:07:48.358Z] [nimbus:info] resource.read.ok {"uri":"campus://hostel-rules","bytes":4939}
+{
+  "contents": [
+    {
+      "uri": "campus://hostel-rules",
+      "mimeType": "text/markdown",
+      "text": "# Nimbus University Student Residences — Hostel Rules & Curfew Policy\n\n> - **Document ID:** `NUSR-POLICY-2026` (Synthetic Campus Fixture)\n> - **Effective Term:** `Fall-2026`\n> - **Scope:** Hostel-Kaveri, Hostel-Narmada, and Hostel-Godavari Student Residences\n> - **Notice:** All names, office extensions, and email addresses in this file are purely synthetic mock fixtures.\n\n---\n\n## 1. Gate Curfew & Late-Entry Passes\n\n- **1.1 Weekday Gate Curfew:** Main hostel residence gates close at **22:30 IST** Sunday through Thursday. Residents must scan their campus ID at the security turnstile upon entry.\n- **1.2 Weekend Gate Curfew:** On Friday and Saturday nights (and eve of gazetted campus holidays), the main gate remains open until **23:30 IST**.\n- **1.3 Late-Entry Pass Procedure:** Residents returning after curfew for academic lab work, hackathon milestones, or verified travel must log an advance late-entry pass at the Hostel Security Desk before **20:00 IST**. Unregistered late returns are logged for warden review; no automatic grace-period exemptions exist outside a filed pass.\n\n## 2. Visitor Registration & Logbook Hours\n\n- **2.1 Weekday & Weekend Visitor Hours:** Non-resident visitors (including parents, day-scholar project teammates, and visiting students from other hostels) must sign the Main Gate Visitor Logbook with valid photo ID. Weekday visiting hours run **09:00–20:30 IST**; weekend visiting hours run **09:00–21:00 IST**.\n- **2.2 Common-Area Restriction:** Visitors are strictly limited to the ground-floor reception lounge, study atrium, and dining hall courtyard. Entry into upper residential wings or sleeping rooms is prohibited without written Warden approval.\n- **2.3 Overnight Guests:** Unauthorized overnight stays in student rooms are prohibited. Visiting parents requiring short-term accommodation must book the Campus Guest House via the Student Affairs Office.\n\n## 3. Electrical Appliances & Pantry Safety\n\n- **3.1 Permitted Low-Wattage Devices:** Laptops, phone chargers, desk lamps (LED <= 20W), and certified study monitors are permitted inside student sleeping rooms.\n- **3.2 Electric Kettles & Floor Pantry Bays:** Electric kettles rated up to **800W** with automatic shutoff are permitted **only inside designated floor pantry bays**, never inside sleeping rooms or plugged into multi-strip extension cords.\n- **3.3 Prohibited High-Load Appliances:** Immersion water heaters, open-coil hot plates, induction cooktops, space heaters, and steam irons are prohibited inside residential rooms due to circuit breaker load limits. Prohibited items discovered during inspection are impounded until semester end.\n\n## 4. Dining Hall & Mess Timings\n\nAll residential dining halls operate on **Asia/Kolkata (IST)** schedules:\n\n- **4.1 Breakfast:** `07:30 – 09:30 IST` (Monday–Friday); `08:00 – 10:00 IST` (Saturday–Sunday).\n- **4.2 Lunch:** `12:15 – 14:15 IST` (Monday–Sunday).\n- **4.3 Evening Tea & Snacks:** `16:45 – 17:45 IST` (Monday–Sunday).\n- **4.4 Dinner:** `19:30 – 21:30 IST` (Monday–Sunday).\n- **4.5 Mess Rebate Notice:** Academic travel or medical absences exceeding 4 consecutive days require advance mess rebate filing at least 24 hours prior to departure.\n\n## 5. Quiet Hours & Academic Study Norms\n\n- **5.1 Mandatory Quiet Hours:** Quiet hours run **22:00 – 06:00 IST** daily in all residential wings. Speakers, amplified instruments, and corridor gatherings are prohibited during quiet hours.\n- **5.2 Shared Reading Rooms:** Floor study rooms remain open 24/7 for silent individual or low-voice collaborative work provided corridor doors remain closed after **22:00 IST**.\n- **5.3 Lab & Emergency Maintenance:** Urgent electrical or plumbing issues inside rooms must be reported to the Ground Floor Caretaker Desk rather than attempting DIY wiring or fixture repairs.\n\n## 6. Disciplinary Escalation & Warden Contacts (Synthetic Mock Contacts)\n\n- **6.1 First-Level Support (Floor & Caretaker Desk):**\n  - Hostel Caretaker Desk (24/7): `Intercom Ext. 4100 (Mock)` · `caretaker-desk@nimbus.mock.edu`\n- **6.2 Warden Review & Exception Escalation:**\n  - Senior Warden (Hostel-Kaveri): **Warden Meera Nair (Mock)** · `Intercom Ext. 4101 (Mock)` · `warden-kaveri@nimbus.mock.edu`\n  - Assistant Warden (Residential Operations): **Warden Arvind Rao (Mock)** · `Intercom Ext. 4102 (Mock)` · `warden-ops@nimbus.mock.edu`\n- **6.3 Escalation Ladder:**\n  1. Minor logbook or appliance infractions are reviewed at the Hostel Warden Office within 48 hours.\n  2. Repeated curfew violations (3+ unexcused late entries in a semester) or prohibited high-load appliance seizures are escalated to the Chief Warden & Dean of Student Affairs Committee.\n  3. Master escalation records under `data/protected/warden_escalation_roster.json` are strictly read-only administrative files; schedule or contact update requests must be submitted as proposals for administrative verification.\n"
+    }
+  ]
+}
+
+=== MCP INSPECTOR CLI (v1.0.0): failure case (-32602 bad student_id) ===
+[2026-11-16T20:07:48.987Z] [nimbus:info] server.ready {"transport":"stdio","pid":80196}
+[2026-11-16T20:07:48.999Z] [nimbus:warn] tool.validation_failed {"tool":"get_fee_status","detail":"student_id: student_id must match format STU-YYYY-NNN (e.g., STU-2026-001)"}
+{"error":{"code":"error","message":"MCP error -32602: Invalid arguments for tool get_fee_status: student_id: student_id must match format STU-YYYY-NNN (e.g., STU-2026-001)"}}
+
+=== MCP INSPECTOR CLI (v1.0.0): failure case (isError: true MECH-Z) ===
+[2026-11-16T20:07:49.628Z] [nimbus:info] server.ready {"transport":"stdio","pid":80244}
+[2026-11-16T20:07:49.640Z] [nimbus:warn] tool.get_timetable.domain_error {"error":"UNKNOWN_BATCH","batch":"MECH-Z","day":"Monday"}
+{
+  "content": [
+    {
+      "type": "text",
+      "text": "{\"error\":\"UNKNOWN_BATCH\",\"message\":\"Batch 'MECH-Z' was not found in the campus timetable.\",\"valid_batches\":[\"AI-DS-A\",\"CSE-A\",\"CSE-B\",\"ECE-A\"]}"
+    }
+  ],
+  "isError": true
+}
+{"error":{"code":"tool_is_error","message":"Tool 'get_timetable' returned isError:true."}}

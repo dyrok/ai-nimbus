@@ -1,0 +1,47 @@
+=== PRE-CLEANUP HISTORY GRAPH ===
+* 5ddf0b7 (HEAD -> main) chore: synchronize campus-helpdesk v1.0.0 release metadata and bundle
+*   7f94014 Merge bugfix/hook-path into main (resolved plugin.json metadata)
+|\  
+| * f2d51a9 (bugfix/hook-path) feat(hooks): harden PreToolUse protected-data guard and add adversarial hook tests
+* |   8276036 Merge feature/mcp-server into main
+|\ \  
+| * | 0850d9e (feature/mcp-server) feat(mcp-server): add campus-helpdesk stdio MCP server, bundle, and tests
+| |/  
+* |   db2982b Merge feature/skill-tests into main
+|\ \  
+| |/  
+|/|   
+| * 4ce4420 (feature/skill-tests) feat(skill): implement timetable-helper skill, CSV fixture, CLI script, command, and unit tests
+|/  
+* 2bfd15d (tag: v0.1.0) chore: initialize campus-helpdesk v0.1.0 baseline skeleton
+
+=== SAFE WORKTREE CLEANUP ===
+$ git worktree remove .claude/worktrees/feature-skill-tests
+$ git worktree remove .claude/worktrees/feature-mcp-server
+$ git worktree remove .claude/worktrees/bugfix-hook-path
+$ git worktree prune --verbose
+$ git branch -d feature/skill-tests feature/mcp-server bugfix/hook-path
+Deleted branch feature/skill-tests (was 4ce4420).
+Deleted branch feature/mcp-server (was 0850d9e).
+Deleted branch bugfix/hook-path (was f2d51a9).
+
+=== POST-CLEANUP WORKTREE LIST & GRAPH ===
+$ git worktree list
+/Users/ns/code/ai-nimbus 5ddf0b7 [main]
+
+$ git log --graph --oneline --decorate --all
+* 5ddf0b7 (HEAD -> main) chore: synchronize campus-helpdesk v1.0.0 release metadata and bundle
+*   7f94014 Merge bugfix/hook-path into main (resolved plugin.json metadata)
+|\  
+| * f2d51a9 feat(hooks): harden PreToolUse protected-data guard and add adversarial hook tests
+* |   8276036 Merge feature/mcp-server into main
+|\ \  
+| * | 0850d9e feat(mcp-server): add campus-helpdesk stdio MCP server, bundle, and tests
+| |/  
+* |   db2982b Merge feature/skill-tests into main
+|\ \  
+| |/  
+|/|   
+| * 4ce4420 feat(skill): implement timetable-helper skill, CSV fixture, CLI script, command, and unit tests
+|/  
+* 2bfd15d (tag: v0.1.0) chore: initialize campus-helpdesk v0.1.0 baseline skeleton

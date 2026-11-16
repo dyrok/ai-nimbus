@@ -1,0 +1,223 @@
+$ claude plugin validate --strict .
+Validating marketplace manifest: /Users/ns/code/ai-nimbus/.claude-plugin/marketplace.json
+
+✔ Validation passed
+
+$ claude plugin validate --strict ./plugins/campus-helpdesk
+Validating plugin manifest: /Users/ns/code/ai-nimbus/plugins/campus-helpdesk/.claude-plugin/plugin.json
+
+Plugin directory checks for /Users/ns/code/ai-nimbus/plugins/campus-helpdesk. The plugin directory is the catalog that plugins are submitted to; this is a subset of what it runs.
+
+✔ These checks found nothing to report
+
+The directory also runs a safety scan and a policy review that this command does not.
+
+✔ Validation passed
+
+$ claude plugin marketplace add ./
+Adding marketplace…✔ Successfully added marketplace: nimbus-campus-marketplace (declared in user settings)
+
+$ claude plugin marketplace list
+Configured marketplaces:
+
+  ❯ anthropic-plugin-directory
+    Source: Built in (Anthropic Directory)
+
+  ❯ claude-plugins-official
+    Source: GitHub (anthropics/claude-plugins-official)
+
+  ❯ claude-code-plugins
+    Source: GitHub (anthropics/claude-code)
+
+  ❯ capcut-cli
+    Source: Git (https://github.com/renezander030/capcut-cli.git)
+
+  ❯ mcpmarket-me
+    Source: Folder (/Users/ns/.claude/plugins/mcpmarket-me)
+
+  ❯ nimbus-campus-marketplace
+    Source: Folder (/Users/ns/code/ai-nimbus)
+
+From claude.ai:
+
+  ❯ claudeai-my-uploads (listed as "My Uploads") — hosted on claude.ai, your uploads · not added
+    Add: claude plugin marketplace add --claudeai claudeai-my-uploads
+
+  ❯ (no CLI name) · listed as "Anthropic Directory" (browse on claude.ai)
+
+
+$ claude plugin install campus-helpdesk@nimbus-campus-marketplace
+Installing plugin "campus-helpdesk@nimbus-campus-marketplace"...✔ Successfully installed plugin: campus-helpdesk@nimbus-campus-marketplace (scope: user)
+
+$ claude plugin list
+Installed plugins:
+
+  ❯ campus-helpdesk@nimbus-campus-marketplace
+    Version: 1.0.0
+    Read from: /Users/ns/code/ai-nimbus/plugins/campus-helpdesk
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ clangd-lsp@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ figma@claude-plugins-official
+    Version: 2.2.157
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ firebase@claude-plugins-official
+    Version: f59aa2e6dd7d
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ frontend-design@claude-plugins-official
+    Version: 1.1.1
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ github@claude-plugins-official
+    Version: f59aa2e6dd7d
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ mcpmarket-me@mcpmarket-me
+    Version: 0.1.0
+    Read from: /Users/ns/.claude/plugins/mcpmarket-me
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ vercel@claude-plugins-official
+    Version: 0.50.0
+    Scope: user
+    Status: ✔ enabled
+    Note: The packages it lists are not installed. Run `claude plugin update vercel@claude-plugins-official` to install them
+
+Synced from claude.ai:
+
+  ❯ asd-ste100@synced
+    Version: unknown
+    Path: /Users/ns/.claude/plugins/synced/5877526d-40b5-4cd4-8978-b7fd73cf480d_0f569625-96cf-4671-a39e-fc16baa06f31/asd-ste100
+    Status: ✔ loaded
+
+Skills-directory plugins (.claude/skills/*):
+
+  ❯ humanizer@skills-dir
+    Version: 3.0.0
+    Scope: user
+    Path: ~/.claude/skills/humanizer
+    Status: ✔ loaded
+
+
+$ claude plugin details campus-helpdesk@nimbus-campus-marketplace
+campus-helpdesk 1.0.0
+  Description: Campus Helpdesk Agent bundling deterministic timetable skill, protected-data guard hooks, and campus stdio MCP server
+  Source: campus-helpdesk@nimbus-campus-marketplace
+
+Component inventory
+  Skills (2)  timetable, timetable-helper
+  Agents (0)
+  Hooks (1)  PreToolUse  (harness-only — no model context cost)
+  MCP servers (1)  campus-helpdesk  (tool schemas resolved at runtime; not counted)
+  LSP servers (0)
+
+Projected token cost
+  Always-on:   ~148 tok   added to every session
+
+Per-component (rounded)
+  component         always-on  on-invoke
+  timetable-helper       ~110      ~1.7k
+  timetable               ~40       ~830
+
+  On-invoke cost is paid each time a skill or agent fires.
+  Token counts are estimates and may differ from actual usage.
+
+$ claude plugin uninstall campus-helpdesk@nimbus-campus-marketplace
+✔ Successfully uninstalled plugin: campus-helpdesk (scope: user)
+
+$ claude plugin marketplace remove nimbus-campus-marketplace
+✔ Successfully removed marketplace: nimbus-campus-marketplace
+
+$ claude plugin list
+Installed plugins:
+
+  ❯ clangd-lsp@claude-plugins-official
+    Version: 1.0.0
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ figma@claude-plugins-official
+    Version: 2.2.157
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ firebase@claude-plugins-official
+    Version: f59aa2e6dd7d
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ frontend-design@claude-plugins-official
+    Version: 1.1.1
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ github@claude-plugins-official
+    Version: f59aa2e6dd7d
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ mcpmarket-me@mcpmarket-me
+    Version: 0.1.0
+    Read from: /Users/ns/.claude/plugins/mcpmarket-me
+    Scope: user
+    Status: ✔ enabled
+
+  ❯ vercel@claude-plugins-official
+    Version: 0.50.0
+    Scope: user
+    Status: ✔ enabled
+    Note: The packages it lists are not installed. Run `claude plugin update vercel@claude-plugins-official` to install them
+
+Synced from claude.ai:
+
+  ❯ asd-ste100@synced
+    Version: unknown
+    Path: /Users/ns/.claude/plugins/synced/5877526d-40b5-4cd4-8978-b7fd73cf480d_0f569625-96cf-4671-a39e-fc16baa06f31/asd-ste100
+    Status: ✔ loaded
+
+Skills-directory plugins (.claude/skills/*):
+
+  ❯ humanizer@skills-dir
+    Version: 3.0.0
+    Scope: user
+    Path: ~/.claude/skills/humanizer
+    Status: ✔ loaded
+
+
+$ claude plugin marketplace list
+Configured marketplaces:
+
+  ❯ anthropic-plugin-directory
+    Source: Built in (Anthropic Directory)
+
+  ❯ claude-plugins-official
+    Source: GitHub (anthropics/claude-plugins-official)
+
+  ❯ claude-code-plugins
+    Source: GitHub (anthropics/claude-code)
+
+  ❯ capcut-cli
+    Source: Git (https://github.com/renezander030/capcut-cli.git)
+
+  ❯ mcpmarket-me
+    Source: Folder (/Users/ns/.claude/plugins/mcpmarket-me)
+
+From claude.ai:
+
+  ❯ claudeai-my-uploads (listed as "My Uploads") — hosted on claude.ai, your uploads · not added
+    Add: claude plugin marketplace add --claudeai claudeai-my-uploads
+
+  ❯ (no CLI name) · listed as "Anthropic Directory" (browse on claude.ai)
+

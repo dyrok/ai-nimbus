@@ -1,0 +1,33 @@
+$ git worktree add -b feature/skill-tests .claude/worktrees/feature-skill-tests main
+Preparing worktree (new branch 'feature/skill-tests')
+HEAD is now at 2bfd15d chore: initialize campus-helpdesk v0.1.0 baseline skeleton
+$ git worktree add -b feature/mcp-server .claude/worktrees/feature-mcp-server main
+Preparing worktree (new branch 'feature/mcp-server')
+HEAD is now at 2bfd15d chore: initialize campus-helpdesk v0.1.0 baseline skeleton
+$ git worktree add -b bugfix/hook-path .claude/worktrees/bugfix-hook-path main
+Preparing worktree (new branch 'bugfix/hook-path')
+HEAD is now at 2bfd15d chore: initialize campus-helpdesk v0.1.0 baseline skeleton
+
+$ git worktree list
+/Users/ns/code/ai-nimbus                                       2bfd15d [main]
+/Users/ns/code/ai-nimbus/.claude/worktrees/bugfix-hook-path    2bfd15d [bugfix/hook-path]
+/Users/ns/code/ai-nimbus/.claude/worktrees/feature-mcp-server  2bfd15d [feature/mcp-server]
+/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests 2bfd15d [feature/skill-tests]
+
+$ git worktree list --porcelain
+worktree /Users/ns/code/ai-nimbus
+HEAD 2bfd15d88ccb29f900d2e3b76c4bd1317f034629
+branch refs/heads/main
+
+worktree /Users/ns/code/ai-nimbus/.claude/worktrees/bugfix-hook-path
+HEAD 2bfd15d88ccb29f900d2e3b76c4bd1317f034629
+branch refs/heads/bugfix/hook-path
+
+worktree /Users/ns/code/ai-nimbus/.claude/worktrees/feature-mcp-server
+HEAD 2bfd15d88ccb29f900d2e3b76c4bd1317f034629
+branch refs/heads/feature/mcp-server
+
+worktree /Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests
+HEAD 2bfd15d88ccb29f900d2e3b76c4bd1317f034629
+branch refs/heads/feature/skill-tests
+

@@ -13,6 +13,8 @@ mcp-server/dist
 *.log
 !evidence/logs/
 !evidence/logs/*.log
+!submission/evidence/logs/
+!submission/evidence/logs/*.log
 .claude/worktrees/
 tmp/
 scratch/

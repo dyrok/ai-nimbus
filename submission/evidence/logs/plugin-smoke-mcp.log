@@ -1,0 +1,24 @@
+INIT_CAMPUS_TOOLS: ['ListMcpResourcesTool', 'ReadMcpResourceDirTool', 'ReadMcpResourceTool', 'mcp__plugin_campus-helpdesk_campus-helpdesk__get_fee_status', 'mcp__plugin_campus-helpdesk_campus-helpdesk__get_timetable']
+INIT_MCP_SERVERS: [{'name': 'plugin:github:github', 'status': 'failed', 'source': 'plugin'}, {'name': 'plugin:firebase:firebase', 'status': 'connected', 'source': 'plugin'}, {'name': 'plugin:campus-helpdesk:campus-helpdesk', 'status': 'connected', 'source': 'plugin'}, {'name': 'whatsapp', 'status': 'connected', 'source': 'user'}, {'name': 'hostinger-mcp', 'status': 'connected', 'source': 'user'}, {'name': 'coolify-mcp', 'status': 'connected', 'source': 'user'}, {'name': 'playwright', 'status': 'connected', 'source': 'user'}, {'name': 'notebooklm-mcp', 'status': 'failed', 'source': 'user'}, {'name': 'packet-tracer', 'status': 'failed', 'source': 'user'}, {'name': 'claude_design', 'status': 'failed', 'source': 'user'}, {'name': 'notion', 'status': 'connected', 'source': 'user'}, {'name': 'premierpro-mcp', 'status': 'connected', 'source': 'user'}, {'name': 'Neon', 'status': 'needs-auth', 'source': 'user'}, {'name': 'claude.ai Claude Docs', 'status': 'connected', 'source': 'claudeai'}, {'name': 'claude.ai Metricool Social Media Management', 'status': 'needs-auth', 'source': 'claudeai'}, {'name': 'claude.ai Canva', 'status': 'connected', 'source': 'claudeai'}, {'name': 'claude.ai Vercel', 'status': 'connected', 'source': 'claudeai'}, {'name': 'claude.ai Figma', 'status': 'connected', 'source': 'claudeai'}, {'name': 'claude.ai Google Drive', 'status': 'connected', 'source': 'claudeai'}]
+TOOL_USE: ToolSearch {"query": "select:mcp__plugin_campus-helpdesk_campus-helpdesk__get_fee_status,ListMcpResourcesTool,ReadMcpResourceTool", "max_results": 5}
+TOOL_RESULT: [{'type': 'tool_reference', 'tool_name': 'mcp__plugin_campus-helpdesk_campus-helpdesk__get_fee_status'}, {'type': 'tool_reference', 'tool_name': 'ListMcpResourcesTool'}, {'type': 'tool_reference', 'tool_name': 'ReadMcpResourceTool'}]
+TOOL_USE: mcp__plugin_campus-helpdesk_campus-helpdesk__get_fee_status {"student_id": "STU-2026-002"}
+TOOL_RESULT: [{'type': 'text', 'text': '{"student_id":"STU-2026-002","student_name":"Diya Nair","batch":"CSE-B","term":"Fall-2026","status":"PARTIAL","currency":"INR","total_inr":125000,"tuition_inr":90000,"hostel_inr":35000,"late_fee_inr":0,"paid_inr":75000,"balance_inr":50000,"due_date":"2026-11-30","last_payment_ref":"MOCK-PAY-2026-1042"}'}]
+TOOL_USE: ListMcpResourcesTool {"server": "plugin:campus-helpdesk:campus-helpdesk"}
+TOOL_RESULT: [{"name":"hostel-rules","title":"Nimbus Campus Hostel Rules & Curfew Policy","uri":"campus://hostel-rules","description":"Official campus hostel curfew timings, visitor policies, electrical appliance limits, mess hours, quiet hours, and warden escalation guidelines","mimeType":"text/markdown","server":"plugin:campus-helpdesk:campus-helpdesk"}]
+TOOL_USE: ReadMcpResourceTool {"server": "plugin:campus-helpdesk:campus-helpdesk", "uri": "campus://hostel-rules"}
+TOOL_RESULT: {"contents":[{"uri":"campus://hostel-rules","mimeType":"text/markdown","text":"# Nimbus University Student Residences — Hostel Rules & Curfew Policy\n\n> - **Document ID:** `NUSR-POLICY-2026` (Synthetic Campus Fixture)\n> - **Effective Term:** `Fall-2026`\n> - **Scope:** Hostel-Kaveri, Hostel-Narmada, and Hostel-Godavari Student Residences\n> - **Notice:** All names, office extensions, and email a
+ASSISTANT: **Fee status for STU-2026-002** (Diya Nair, CSE-B, Fall-2026): **PARTIAL**
+
+| Item | Amount (INR) |
+|---|---|
+| Tuition | 90,000 |
+| Hostel | 35,000 |
+| Late fee | 0 |
+| **Total** | **125,000** |
+| Paid | 75,000 |
+| **Balance due** | **50,000** |
+
+The balance is due by **2026-11-30**, and the last payment reference is `MOCK-PAY-2026-1042`.
+
+**Weekday hostel gate curfew:** the main gates close at **22:30 IST**, Sunday through Thursday (rule 1.1 of the `campus://hostel-rules` resource). Returning later than that requires a late-entry pass filed at the Hostel Security Desk before 20:00 IST.

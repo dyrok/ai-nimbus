@@ -1,0 +1,106 @@
+$ git switch main
+Already on 'main'
+$ git merge --no-ff feature/skill-tests -m "Merge feature/skill-tests into main"
+Merge made by the 'ort' strategy.
+ plugins/campus-helpdesk/commands/timetable.md      |  28 ++
+ .../skills/timetable-helper/SKILL.md               |  55 +++
+ .../skills/timetable-helper/assets/timetable.csv   |  28 ++
+ .../timetable-helper/references/csv-dictionary.md  |  41 +++
+ .../timetable-helper/references/edge-cases.md      |  51 +++
+ .../timetable-helper/scripts/query_timetable.py    | 408 +++++++++++++++++++++
+ tests/skill/test_query_timetable.py                | 393 ++++++++++++++++++++
+ 7 files changed, 1004 insertions(+)
+ create mode 100644 plugins/campus-helpdesk/commands/timetable.md
+ create mode 100644 plugins/campus-helpdesk/skills/timetable-helper/SKILL.md
+ create mode 100644 plugins/campus-helpdesk/skills/timetable-helper/assets/timetable.csv
+ create mode 100644 plugins/campus-helpdesk/skills/timetable-helper/references/csv-dictionary.md
+ create mode 100644 plugins/campus-helpdesk/skills/timetable-helper/references/edge-cases.md
+ create mode 100755 plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py
+ create mode 100644 tests/skill/test_query_timetable.py
+$ git merge --no-ff feature/mcp-server -m "Merge feature/mcp-server into main"
+Merge made by the 'ort' strategy.
+ mcp-server/README.md                               |    31 +
+ mcp-server/data/hostel_rules.md                    |    54 +
+ mcp-server/package-lock.json                       |  2263 ++
+ mcp-server/package.json                            |    26 +
+ mcp-server/scripts/bundle-plugin.mjs               |    63 +
+ mcp-server/src/data.ts                             |   678 +
+ mcp-server/src/index.ts                            |    40 +
+ mcp-server/src/logger.ts                           |    30 +
+ mcp-server/src/server.ts                           |   298 +
+ mcp-server/tests/stdio-protocol.test.ts            |   214 +
+ mcp-server/tests/tools-and-resources.test.ts       |   292 +
+ mcp-server/tsconfig.json                           |    16 +
+ plugins/campus-helpdesk/.claude-plugin/plugin.json |     7 +-
+ plugins/campus-helpdesk/.mcp.json                  |    14 +
+ plugins/campus-helpdesk/data/hostel_rules.md       |    54 +
+ .../servers/campus-helpdesk-mcp.mjs                | 37488 +++++++++++++++++++
+ 16 files changed, 41565 insertions(+), 3 deletions(-)
+ create mode 100644 mcp-server/README.md
+ create mode 100644 mcp-server/data/hostel_rules.md
+ create mode 100644 mcp-server/package-lock.json
+ create mode 100644 mcp-server/package.json
+ create mode 100644 mcp-server/scripts/bundle-plugin.mjs
+ create mode 100644 mcp-server/src/data.ts
+ create mode 100644 mcp-server/src/index.ts
+ create mode 100644 mcp-server/src/logger.ts
+ create mode 100644 mcp-server/src/server.ts
+ create mode 100644 mcp-server/tests/stdio-protocol.test.ts
+ create mode 100644 mcp-server/tests/tools-and-resources.test.ts
+ create mode 100644 mcp-server/tsconfig.json
+ create mode 100644 plugins/campus-helpdesk/.mcp.json
+ create mode 100644 plugins/campus-helpdesk/data/hostel_rules.md
+ create mode 100644 plugins/campus-helpdesk/servers/campus-helpdesk-mcp.mjs
+$ git merge --no-ff bugfix/hook-path -m "Merge bugfix/hook-path into main"
+Auto-merging plugins/campus-helpdesk/.claude-plugin/plugin.json
+CONFLICT (content): Merge conflict in plugins/campus-helpdesk/.claude-plugin/plugin.json
+Automatic merge failed; fix conflicts and then commit the result.
+
+$ git status
+On branch main
+You have unmerged paths.
+  (fix conflicts and run "git commit")
+  (use "git merge --abort" to abort the merge)
+
+Changes to be committed:
+	new file:   plugins/campus-helpdesk/data/protected/academic_calendar_2026.csv
+	new file:   plugins/campus-helpdesk/data/protected/fee_ledger_master.json
+	new file:   plugins/campus-helpdesk/data/protected/warden_escalation_roster.json
+	new file:   plugins/campus-helpdesk/hooks/hooks.json
+	new file:   plugins/campus-helpdesk/hooks/scripts/protect-data.sh
+	new file:   tests/hooks/test_protect_data.sh
+
+Unmerged paths:
+  (use "git add <file>..." to mark resolution)
+	both modified:   plugins/campus-helpdesk/.claude-plugin/plugin.json
+
+
+$ git diff
+diff --cc plugins/campus-helpdesk/.claude-plugin/plugin.json
+index 611ad3a,3ed3aec..0000000
+--- a/plugins/campus-helpdesk/.claude-plugin/plugin.json
++++ b/plugins/campus-helpdesk/.claude-plugin/plugin.json
+@@@ -1,7 -1,7 +1,12 @@@
+  {
+    "name": "campus-helpdesk",
+++<<<<<<< HEAD
+ +  "version": "0.2.0-mcp",
+ +  "description": "Campus Helpdesk Agent plugin featuring the bundled campus-helpdesk-mcp stdio MCP server (get_timetable, get_fee_status, campus://hostel-rules)",
+++=======
++   "version": "0.2.0-hooks",
++   "description": "Campus Helpdesk Agent plugin hardened with canonical PreToolUse path-traversal guard hooks protecting data/protected/",
+++>>>>>>> bugfix/hook-path
+    "author": {
+      "name": "Nimbus Labs",
+      "email": "engineering@nimbuslabs.edu"
+@@@ -12,6 -12,6 +17,10 @@@
+      "timetable",
+      "mcp",
+      "helpdesk",
+++<<<<<<< HEAD
+ +    "stdio-mcp"
+++=======
++     "security-hooks"
+++>>>>>>> bugfix/hook-path
+    ]
+  }
