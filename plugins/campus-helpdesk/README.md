@@ -19,7 +19,7 @@ Or install directly via the directory marketplace command:
 For local repository verification from a clone of `ai-nimbus`:
 
 ```bash
-claude plugin marketplace add .
+claude plugin marketplace add ./
 claude plugin install campus-helpdesk@nimbus-campus-marketplace
 ```
 

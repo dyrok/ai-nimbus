@@ -40,28 +40,31 @@ A deterministic, local-first AI helpdesk assistant built as a self-contained **C
 ```text
 ai-nimbus/
 ├── .claude-plugin/
-│   └── marketplace.json                     # Root marketplace catalog (`nimbus-campus-marketplace`)
+│   └── marketplace.json                     # Root marketplace catalog (`nimbus-campus-marketplace` v1.0.0)
 ├── .gitignore
 ├── README.md
 ├── docs/                                    # Architecture, UX, strategy, design, PRD & checklist
+├── evidence/                                # Captured Parts B–E logs & PNG screenshots
+├── report/                                  # Typst report sources, compiled PDFs & Prompt Log
+│   ├── Campus-Helpdesk-Toolchain-Report.pdf # Complete technical report (Parts A–F)
+│   ├── Prompt-Log.pdf                       # Standalone chronological prompt log PDF
+│   └── Prompt-Log.md                        # Standalone chronological prompt log Markdown
 ├── mcp-server/                              # TypeScript stdio MCP server source, data, bundler & tests
-├── tests/                                   # Repo-level verification suites (skill & hook harnesses)
+├── tests/                                   # Repo-level verification suites (15 skill + 22 hook tests)
 └── plugins/
-    └── campus-helpdesk/                     # Self-contained installable Claude Code plugin
+    └── campus-helpdesk/                     # Self-contained installable Claude Code plugin (v1.0.0)
         ├── .claude-plugin/
         │   └── plugin.json                  # Plugin manifest (`campus-helpdesk`)
         ├── .mcp.json                        # Stdio MCP wiring (`${CLAUDE_PLUGIN_ROOT}`)
         ├── README.md                        # Directory-profile plugin documentation & install guide
         ├── assets/
         │   └── icon.png                     # 512x512 plugin catalog icon
-        ├── commands/                        # `/campus-helpdesk:timetable` slash command (Phase 2)
-        ├── skills/timetable-helper/         # Skill playbook, references, CSV fixture & Python script (Phase 2)
-        ├── hooks/                           # `PreToolUse` `Write|Edit` path-canonicalizing guard (Phase 2)
-        ├── data/                            # Synced `hostel_rules.md` & read-only `protected/` fixtures (Phase 2)
-        └── servers/                         # Bundled `campus-helpdesk-mcp.mjs` ESM executable (Phase 2)
+        ├── commands/                        # `/campus-helpdesk:timetable` slash command
+        ├── skills/timetable-helper/         # Skill playbook, references, CSV fixture & Python script
+        ├── hooks/                           # `PreToolUse` `Write|Edit` path-canonicalizing guard
+        ├── data/                            # Synced `hostel_rules.md` & read-only `0444` `protected/` fixtures
+        └── servers/                         # Bundled `campus-helpdesk-mcp.mjs` ESM executable
 ```
-
-*(Phase `v0.1.0` initializes the baseline trunk, manifests, and documentation; subsystems under `skills/`, `commands/`, `hooks/`, `servers/`, `mcp-server/`, and `tests/` are developed across sibling Git worktrees and integrated on `main`.)*
 
 ---
 
@@ -78,7 +81,7 @@ claude plugin validate --strict --profile directory ./plugins/campus-helpdesk
 ### 2. Local Marketplace Install & Inspection Lifecycle
 
 ```bash
-claude plugin marketplace add .
+claude plugin marketplace add ./
 claude plugin marketplace list
 claude plugin install campus-helpdesk@nimbus-campus-marketplace
 claude plugin list
@@ -107,10 +110,10 @@ npm --prefix mcp-server test
 ### 4. Git Worktree Workflow Primitives
 
 ```bash
-git worktree add -b feature/skill-tests ../ai-nimbus-wt-skill-tests main
+git worktree add -b feature/skill-tests .claude/worktrees/feature-skill-tests main
 git worktree list
 git merge --no-ff feature/skill-tests -m "Merge feature/skill-tests into main"
-git worktree remove ../ai-nimbus-wt-skill-tests
+git worktree remove .claude/worktrees/feature-skill-tests
 git worktree prune --verbose
 ```
 
@@ -118,6 +121,8 @@ git worktree prune --verbose
 
 ## Architecture & Product Documentation
 
+- [Technical Report PDF (Parts A–F)](report/Campus-Helpdesk-Toolchain-Report.pdf)
+- [Prompt Log PDF](report/Prompt-Log.pdf) & [Prompt Log Markdown](report/Prompt-Log.md)
 - [Master PRD & Delivery Roadmap](docs/prd_and_roadmap.md)
 - [Technical Architecture](docs/tech_architecture.md)
 - [Implementation Checklist & Release Gates](docs/implementation_checklist.md)

@@ -74,7 +74,7 @@ flowchart TD
 ```text
 /Users/ns/code/ai-nimbus/
 ├── .claude-plugin/
-│   └── marketplace.json                     # Root marketplace catalog for `claude plugin marketplace add .`
+│   └── marketplace.json                     # Root marketplace catalog for `claude plugin marketplace add ./`
 ├── README.md                                # Repository overview & developer quickstart
 ├── docs/
 │   └── tech_architecture.md                 # This architectural specification
@@ -138,7 +138,7 @@ flowchart TD
 When a user executes:
 
 ```bash
-claude plugin marketplace add .
+claude plugin marketplace add ./
 claude plugin install campus-helpdesk@nimbus-campus-marketplace
 ```
 
@@ -270,7 +270,7 @@ Placed at `/Users/ns/code/ai-nimbus/.claude-plugin/marketplace.json`. Verified a
 * `plugins[].name` (`"campus-helpdesk"`) MUST match `plugins/campus-helpdesk/.claude-plugin/plugin.json` `name` (`"campus-helpdesk"`).
 * `plugins[].source` uses relative path `"./plugins/campus-helpdesk"` so local installation works directly from the git repo root:
   ```bash
-  claude plugin marketplace add .
+  claude plugin marketplace add ./
   claude plugin install campus-helpdesk@nimbus-campus-marketplace
   ```
 

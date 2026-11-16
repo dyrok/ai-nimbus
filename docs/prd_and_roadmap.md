@@ -177,7 +177,7 @@ Every release candidate must pass all technical gates (**G1–G6**), UX/adversar
 | **G5** | MCP Protocol & `stdout` Purity | `npm --prefix mcp-server test` + MCP Inspector CLI/UI verification | Zero non-JSON bytes on `stdout`; diagnostics strictly on `stderr`; `-32602` on bad schema; `isError: true` on unknown records; `campus://hostel-rules` returns markdown |
 | **G6** | Git Worktree & Merge Hygiene | `git worktree list`, `git status`, `git log --graph --oneline --decorate --all`, conflict audit | Controlled `plugin.json` conflict resolved retaining both features; worktrees removed/pruned cleanly; only `main` remains |
 | **UX/ADV** | Personas, Tone & Adversarial | Headless `claude -p --plugin-dir ./plugins/campus-helpdesk --output-format stream-json --include-hook-events --no-session-persistence --permission-prompts none` + `--ax-screen-reader` sample | Passes `UX-01`..`UX-11` and `ADV-01`..`ADV-06`; zero fabricated courses/rooms/rules; SHA-256 of `data/protected/*` unchanged |
-| **L1–L8** | End-to-End Plugin Lifecycle | `marketplace add .` -> `install` -> `list` -> `details` -> live cached smoke check -> `uninstall` -> `marketplace remove` | All lifecycle commands succeed with captured logs/screenshots and clean host state after uninstall |
+| **L1–L8** | End-to-End Plugin Lifecycle | `marketplace add ./` -> `install` -> `list` -> `details` -> live cached smoke check -> `uninstall` -> `marketplace remove` | All lifecycle commands succeed with captured logs/screenshots and clean host state after uninstall |
 | **D1–D5** | Submission Deliverables | `typst compile` PDF (Parts A–F), standalone Prompt Log (`>= 5` caught AI errors), Source List (`2026-11-17`), clean `.zip` archive check (`unzip -tq` + validation of extracted copy) | PDF compiles cleanly without font/layout overflow; all required appendices & archive integrity checks pass |
 
 ---
@@ -250,7 +250,7 @@ flowchart LR
   1. `claude plugin validate --strict .`
   2. `claude plugin validate --strict ./plugins/campus-helpdesk`
   3. `claude plugin validate --strict --profile directory ./plugins/campus-helpdesk`
-  4. `claude plugin marketplace add .` & `claude plugin marketplace list`
+  4. `claude plugin marketplace add ./` & `claude plugin marketplace list`
   5. `claude plugin install campus-helpdesk@nimbus-campus-marketplace`
   6. `claude plugin list`
   7. `claude plugin details campus-helpdesk@nimbus-campus-marketplace` (verify component inventory & token projection)

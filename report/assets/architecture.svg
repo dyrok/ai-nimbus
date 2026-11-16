@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 340" width="880" height="340">
+  <defs>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#1E3A5F"/>
+    </marker>
+    <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#D97706"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 10 5 L 0 9 z" fill="#DC2626"/>
+    </marker>
+  </defs>
+
+  <rect width="880" height="340" rx="8" fill="#F8FAFC" stroke="#E2E8F0" stroke-width="1.2"/>
+
+  <!-- Title -->
+  <text x="20" y="26" font-family="Inter, Helvetica, Arial, sans-serif" font-size="12" font-weight="700" fill="#1E3A5F">
+    Nimbus Labs Campus Helpdesk Toolchain Architecture (campus-helpdesk v1.0.0)
+  </text>
+
+  <!-- User & Claude Host -->
+  <rect x="20" y="110" width="130" height="72" rx="6" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.6"/>
+  <text x="85" y="140" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1E293B">Student / Staff</text>
+  <text x="85" y="158" text-anchor="middle" font-family="Inter, sans-serif" font-size="9.5" fill="#475569">Natural Query or</text>
+  <text x="85" y="171" text-anchor="middle" font-family="DejaVu Sans Mono, Menlo, monospace" font-size="8.5" fill="#1E3A5F">/timetable</text>
+
+  <rect x="195" y="95" width="160" height="102" rx="6" fill="#EFF6FF" stroke="#1E3A5F" stroke-width="1.8"/>
+  <text x="275" y="122" text-anchor="middle" font-family="Inter, sans-serif" font-size="11" font-weight="700" fill="#1E3A5F">Claude Code Host</text>
+  <text x="275" y="139" text-anchor="middle" font-family="Inter, sans-serif" font-size="9" fill="#1E293B">v2.1.322 · MCP Client</text>
+  <text x="275" y="156" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#475569">Progressive Disclosure</text>
+  <text x="275" y="170" text-anchor="middle" font-family="Inter, sans-serif" font-size="8.5" fill="#475569">+ Hook Enforcement</text>
+  <text x="275" y="185" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E3A5F">${CLAUDE_PLUGIN_ROOT}</text>
+
+  <!-- Plugin Container -->
+  <rect x="395" y="45" width="465" height="275" rx="8" fill="#FFFFFF" stroke="#1E3A5F" stroke-width="1.4" stroke-dasharray="6,3"/>
+  <text x="410" y="66" font-family="Inter, sans-serif" font-size="10.5" font-weight="700" fill="#1E3A5F">
+    Plugin Bundle: campus-helpdesk (.claude-plugin/plugin.json)
+  </text>
+
+  <!-- Skill Box -->
+  <rect x="415" y="82" width="210" height="72" rx="5" fill="#ECFDF5" stroke="#047857" stroke-width="1.4"/>
+  <text x="520" y="102" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#047857">Skill: timetable-helper</text>
+  <text x="520" y="118" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">SKILL.md + references/</text>
+  <text x="520" y="132" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">scripts/query_timetable.py</text>
+  <text x="520" y="145" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#475569">assets/timetable.csv (27 rows)</text>
+
+  <!-- Hook Box -->
+  <rect x="415" y="168" width="210" height="68" rx="5" fill="#FEF3C7" stroke="#D97706" stroke-width="1.5"/>
+  <text x="520" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#92400E">PreToolUse Hook Guard</text>
+  <text x="520" y="204" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">hooks/hooks.json (Write|Edit)</text>
+  <text x="520" y="218" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">protect-data.sh -> deny JSON</text>
+  <text x="520" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" fill="#92400E">Blocks data/protected/ (0444)</text>
+
+  <!-- Protected Data Box -->
+  <rect x="655" y="168" width="185" height="68" rx="5" fill="#FEE2E2" stroke="#DC2626" stroke-width="1.4"/>
+  <text x="747" y="188" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#DC2626">Protected Mock Vault</text>
+  <text x="747" y="204" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">fee_ledger_master.json</text>
+  <text x="747" y="217" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">academic_calendar_2026.csv</text>
+  <text x="747" y="230" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8" fill="#1E293B">warden_escalation_roster.json</text>
+
+  <!-- MCP Server Box -->
+  <rect x="415" y="248" width="425" height="58" rx="5" fill="#EFF6FF" stroke="#1E3A5F" stroke-width="1.6"/>
+  <text x="627" y="266" text-anchor="middle" font-family="Inter, sans-serif" font-size="10" font-weight="700" fill="#1E3A5F">
+    MCP Server: campus-helpdesk-mcp (stdio · @modelcontextprotocol/sdk 1.32.2)
+  </text>
+  <text x="627" y="282" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8.2" fill="#1E293B">
+    Tools: get_timetable(batch, day), get_fee_status(student_id)
+  </text>
+  <text x="627" y="296" text-anchor="middle" font-family="DejaVu Sans Mono, monospace" font-size="8.2" fill="#1E293B">
+    Resource: campus://hostel-rules (data/hostel_rules.md) | stderr logs only
+  </text>
+
+  <!-- Edges -->
+  <line x1="150" y1="146" x2="191" y2="146" stroke="#1E3A5F" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+  <line x1="355" y1="118" x2="411" y2="118" stroke="#1E3A5F" stroke-width="1.5" marker-end="url(#arrow-blue)"/>
+  <line x1="355" y1="168" x2="411" y2="196" stroke="#D97706" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arrow-amber)"/>
+  <line x1="625" y1="202" x2="651" y2="202" stroke="#DC2626" stroke-width="1.5" marker-end="url(#arrow-red)"/>
+  <path d="M 275 197 L 275 277 L 411 277" fill="none" stroke="#1E3A5F" stroke-width="1.6" marker-end="url(#arrow-blue)"/>
+  <text x="335" y="270" text-anchor="middle" font-family="Inter, sans-serif" font-size="8" font-weight="600" fill="#1E3A5F">JSON-RPC 2.0 (stdout/stdin)</text>
+
+  <!-- Legend -->
+  <text x="20" y="328" font-family="Inter, sans-serif" font-size="8" fill="#475569">
+    Solid blue: JSON-RPC / skill routing   ·   Dashed amber: PreToolUse interception   ·   Red: blocked write path (data/protected/)
+  </text>
+</svg>

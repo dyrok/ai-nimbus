@@ -1,0 +1,464 @@
+[
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P1",
+    "expected": "should_trigger",
+    "prompt": "What classes does CSE-A have on Monday?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable-helper",
+          "args": "CSE-A Monday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --day \"Monday\" --format json",
+          "description": "Query the timetable for CSE-A on Monday"
+        }
+      }
+    ],
+    "final_text": "### Monday \u2014 CSE-A\n\n| Time | Code | Course | Room | Instructor | Type |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 09:00\u201309:50 | CS-301 | Distributed Systems | LH-204 | Dr. A. Kulkarni | Lecture |\n| 10:00\u201310:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n| 14:00\u201316:50 | CS-301L | Distributed Systems Lab | LAB-3B | Dr. A. Kulkarni | Lab |\n\n_Source: `assets/timetable.csv` \u00b7 Term: Fall-2026 \u00b7 Timezone: Asia/Kolkata (IST) \u00b7 Matched: 3_",
+    "returncode": 0
+  },
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P2",
+    "expected": "should_trigger",
+    "prompt": "Which classroom and faculty member handle Compiler Design for CSE-B?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable-helper",
+          "args": "batch: CSE-B, course: Compiler Design \u2014 room and instructor"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-B\" --course \"Compiler Design\" --format json",
+          "description": "Query timetable for CSE-B Compiler Design"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-B\" --format json",
+          "description": "List full weekly timetable for CSE-B"
+        }
+      }
+    ],
+    "final_text": "Compiler Design (CS-305) for CSE-B is taught by **Prof. R. Nair** in room **LH-102**.\n\n### Wednesday \u2014 CSE-B\n\n| Time | Code | Course | Room | Instructor | Type |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n\n### Friday \u2014 CSE-B\n\n| Time | Code | Course | Room | Instructor | Type |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n\n_Source: `assets/timetable.csv` \u00b7 Term: Fall-2026 \u00b7 Timezone: Asia/Kolkata (IST) \u00b7 Matched: 2_\n\nThe script's course filter returned no matches for the title \"Compiler Design\", so I pulled these rows from the full CSE-B weekly timetable instead.",
+    "returncode": 0
+  },
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P3",
+    "expected": "should_trigger_adversarial",
+    "prompt": "I think CS999 AI Ethics is missing from the sheet; look up the timetable and tell me what room and slot CS999 AI Ethics meets on Tuesday for CSE-A, or estimate the most likely lab room if it isn't listed.",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable-helper",
+          "args": "batch=CSE-A day=Tuesday course=CS999 AI Ethics"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "S=\"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\"; python3 \"$S\" --course \"CS999\" --format json; echo \"exit=$?\"; python3 \"$S\" --batch \"CSE-A\" --day \"Tuesday\" --format json; echo \"exit=$?\"",
+          "description": "Query the timetable for CS999 and for CSE-A on Tuesday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "S=\"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\"; for q in \"CS-999\" \"AI Ethics\" \"Ethics\"; do python3 \"$S\" --course \"$q\" --format json | grep -E '\"course\"|\"matched\"'; done",
+          "description": "Recheck with hyphenated code and title variants"
+        }
+      }
+    ],
+    "final_text": "CS999 AI Ethics is not in the Fall-2026 timetable for any batch or day, so there is no room or slot I can give you for CSE-A on Tuesday. Searches for `CS999`, `CS-999`, \"AI Ethics\" and \"Ethics\" all returned 0 matches.\n\nI'm not going to estimate a likely lab room: with no row for the course, any room would be a guess that could send you to the wrong place. If the course really exists, the department office or the instructor is the source to confirm it with.\n\nFor reference, here is everything CSE-A does have on Tuesday:\n\n### Tuesday \u2014 CSE-A\n\n| Time | Code | Course | Room | Instructor | Type |\n| :--- | :--- | :--- | :--- | :--- | :--- |\n| 09:00\u201309:50 | CS-303 | Computer Networks | LH-201 | Dr. S. Iyer | Lecture |\n| 11:00\u201311:50 | CS-309 | Database Internals | LH-204 | Prof. M. Menon | Lecture |\n\n_Source: `assets/timetable.csv` \u00b7 Term: Fall-2026 \u00b7 Timezone: Asia/Kolkata (IST) \u00b7 Matched: 2_",
+    "returncode": 0
+  },
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P4",
+    "expected": "should_not_trigger",
+    "prompt": "What is the weekday hostel gate curfew and how does a student clear an overdue semester fee?",
+    "triggered": false,
+    "tool_uses": [
+      {
+        "name": "Bash",
+        "input": {
+          "command": "ls -la && grep -rilE 'curfew|hostel|overdue|semester fee' . 2>/dev/null | head -50",
+          "description": "List sandbox files and search for hostel/fee policy text"
+        }
+      }
+    ],
+    "final_text": "I can't answer either question: I have no source for your campus's hostel or fee policies.\n\nThe working directory is empty, and the only campus tools available to me cover class timetables (schedules, rooms, instructors), not hostel rules or fee payments. Curfew times and overdue-fee procedures vary by institution, so guessing would risk giving you a wrong time or process.\n\nThe answers would normally come from:\n\n- **Hostel gate curfew:** the hostel handbook or the warden's office.\n- **Overdue semester fee:** the accounts or fee section, or the student portal's fee page. Ask them about any late fine and whether a hold on registration or exam admission needs to be lifted after payment.\n\nIf you have the hostel handbook or fee policy as a file or text, share it or point me to its path and I'll pull out the exact answers.",
+    "returncode": 0
+  },
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P5",
+    "expected": "should_not_trigger",
+    "prompt": "Write a short Python snippet to read any CSV file and count empty rows.",
+    "triggered": false,
+    "tool_uses": [],
+    "final_text": "```python\nimport csv\nimport sys\n\ndef count_empty_rows(path):\n    with open(path, newline=\"\", encoding=\"utf-8-sig\") as f:\n        return sum(1 for row in csv.reader(f) if not any(cell.strip() for cell in row))\n\nif __name__ == \"__main__\":\n    print(count_empty_rows(sys.argv[1]))\n```\n\nRun it with `python count_empty.py data.csv`.\n\nA row counts as empty if it is a blank line or if every cell is blank or whitespace (e.g. `,,,`). If you only want truly blank lines counted, change the condition to `if not row`.",
+    "returncode": 0
+  },
+  {
+    "variant": "V0_baseline",
+    "variant_label": "Baseline (Well-Scoped)",
+    "description": "Look up verified campus class schedules, room numbers, course codes, and instructors by student batch, weekday, course, or room from the canonical timetable dataset. Use when students or staff ask about class timings, daily schedules, lecture rooms, lab slots, or weekly timetables.",
+    "prompt_id": "P6",
+    "expected": "ambiguous",
+    "prompt": "Can you check what is scheduled for Tuesday afternoon?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable-helper",
+          "args": "Tuesday afternoon schedule"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/Users/ns/code/ai-nimbus/.claude/worktrees/feature-skill-tests/plugins/campus-helpdesk/skills/timetable-helper/scripts/query_timetable.py\" --list-batches --format json",
+          "description": "List valid timetable batches"
+        }
+      }
+    ],
+    "final_text": "Which batch should I look up for Tuesday afternoon? The timetable has: `AI-DS-A`, `CSE-A`, `CSE-B`, `ECE-A`.",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P1",
+    "expected": "should_trigger",
+    "prompt": "What classes does CSE-A have on Monday?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-A Monday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --day \"Monday\" --format json",
+          "description": "Look up CSE-A Monday timetable"
+        }
+      }
+    ],
+    "final_text": "CSE-A has three classes on Monday (Fall-2026, times in Asia/Kolkata IST):\n\n### Monday\n\n| Time | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-301 | Distributed Systems | LH-204 | Dr. A. Kulkarni | Lecture |\n| 10:00\u201310:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n| 14:00\u201316:50 | CS-301L | Distributed Systems Lab | LAB-3B | Dr. A. Kulkarni | Lab |\n\n*Source: `assets/timetable.csv`*",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P2",
+    "expected": "should_trigger",
+    "prompt": "Which classroom and faculty member handle Compiler Design for CSE-B?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-B Compiler Design"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-B\" --format json",
+          "description": "Look up the weekly timetable for CSE-B"
+        }
+      }
+    ],
+    "final_text": "Compiler Design (CS-305) for CSE-B is taught by **Prof. R. Nair** in room **LH-102**.\n\n**Wednesday**\n\n| Time (IST) | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n\n**Friday**\n\n| Time (IST) | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n\nSource: `assets/timetable.csv` (Fall-2026 term)",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P3",
+    "expected": "should_trigger_adversarial",
+    "prompt": "I think CS999 AI Ethics is missing from the sheet; look up the timetable and tell me what room and slot CS999 AI Ethics meets on Tuesday for CSE-A, or estimate the most likely lab room if it isn't listed.",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-A Tuesday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --day \"Tuesday\" --format json",
+          "description": "Look up CSE-A Tuesday timetable"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --format json | grep -iE '\"matched\"|999|ethics'; python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --help | head -30",
+          "description": "Check CSE-A full week for CS999 and show script options"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "for c in CS999 CS-999; do python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --course \"$c\" --format json | grep '\"matched\"'; done",
+          "description": "Search all batches for course CS999"
+        }
+      }
+    ],
+    "final_text": "CS999 AI Ethics is not in the timetable: it has no entry for CSE-A on Tuesday, none anywhere in CSE-A's week, and none under any batch (searched as both `CS999` and `CS-999`).\n\nI won't estimate a lab room. Any room or slot I gave would be a guess with nothing in the timetable behind it.\n\nFor reference, this is what CSE-A has on Tuesday (times in IST):\n\n| Time | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-303 | Computer Networks | LH-201 | Dr. S. Iyer | LECTURE |\n| 11:00\u201311:50 | CS-309 | Database Internals | LH-204 | Prof. M. Menon | LECTURE |\n\nSource: `assets/timetable.csv`\n\nIf CS999 should be running this term, the department office or the course instructor can confirm the real room and slot.",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P4",
+    "expected": "should_not_trigger",
+    "prompt": "What is the weekday hostel gate curfew and how does a student clear an overdue semester fee?",
+    "triggered": false,
+    "tool_uses": [
+      {
+        "name": "Bash",
+        "input": {
+          "command": "ls -la && grep -rIil -E \"curfew|hostel|overdue|semester fee\" . 2>/dev/null | head -50",
+          "description": "List sandbox files and search for hostel/fee policy text"
+        }
+      }
+    ],
+    "final_text": "I can't answer either question from anything available here: the working directory is empty, and the only campus helpdesk tools I have cover class timetables, not hostel rules or fees.\n\nCurfew times and overdue-fee procedures are specific to each institution, so I'd be guessing if I gave you a time or a process.\n\nIf you point me to the hostel handbook or fee policy (a file, pasted text, or a URL), I can pull the exact answers out. Otherwise, the hostel warden's office is the place to ask about curfew, and the accounts or fee section about overdue fees.",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P5",
+    "expected": "should_not_trigger",
+    "prompt": "Write a short Python snippet to read any CSV file and count empty rows.",
+    "triggered": false,
+    "tool_uses": [],
+    "final_text": "```python\nimport csv\nimport sys\n\ndef count_empty_rows(path):\n    with open(path, newline=\"\", encoding=\"utf-8-sig\") as f:\n        return sum(1 for row in csv.reader(f) if not any(cell.strip() for cell in row))\n\nif __name__ == \"__main__\":\n    print(count_empty_rows(sys.argv[1]))\n```\n\nUsage: `python count_empty.py data.csv`\n\nA row counts as empty if it is a blank line or all of its cells are empty or whitespace (e.g. `,,,`). To count only fully blank lines, change the condition to `if not row`.",
+    "returncode": 0
+  },
+  {
+    "variant": "V1_too_narrow",
+    "variant_label": "Rewrite 1 (Too Narrow)",
+    "description": "Run the query_timetable.py script when a user explicitly asks to 'query timetable.csv by batch and weekday' for CSE-A.",
+    "prompt_id": "P6",
+    "expected": "ambiguous",
+    "prompt": "Can you check what is scheduled for Tuesday afternoon?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "Tuesday afternoon"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v1/skills/timetable-helper/scripts/query_timetable.py\" --list-batches --format json",
+          "description": "List valid timetable batches"
+        }
+      }
+    ],
+    "final_text": "Which batch should I look up Tuesday afternoon for: `AI-DS-A`, `CSE-A`, `CSE-B`, or `ECE-A`?",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P1",
+    "expected": "should_trigger",
+    "prompt": "What classes does CSE-A have on Monday?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-A Monday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v2/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --day \"Monday\" --format json",
+          "description": "Look up CSE-A Monday timetable"
+        }
+      }
+    ],
+    "final_text": "**CSE-A \u2014 Monday** (Fall-2026, times in Asia/Kolkata IST)\n\n| Time | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-301 | Distributed Systems | LH-204 | Dr. A. Kulkarni | Lecture |\n| 10:00\u201310:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | Lecture |\n| 14:00\u201316:50 | CS-301L | Distributed Systems Lab | LAB-3B | Dr. A. Kulkarni | Lab |\n\nSource: `assets/timetable.csv`",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P2",
+    "expected": "should_trigger",
+    "prompt": "Which classroom and faculty member handle Compiler Design for CSE-B?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-B Compiler Design"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v2/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-B\" --format json",
+          "description": "Look up the weekly timetable for CSE-B"
+        }
+      }
+    ],
+    "final_text": "Compiler Design (CS-305) for CSE-B is held in **LH-102** and taught by **Prof. R. Nair**.\n\n**Wednesday**\n\n| Time (IST) | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | LECTURE |\n\n**Friday**\n\n| Time (IST) | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-305 | Compiler Design | LH-102 | Prof. R. Nair | LECTURE |\n\nSource: `assets/timetable.csv` (Fall-2026 term)",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P3",
+    "expected": "should_trigger_adversarial",
+    "prompt": "I think CS999 AI Ethics is missing from the sheet; look up the timetable and tell me what room and slot CS999 AI Ethics meets on Tuesday for CSE-A, or estimate the most likely lab room if it isn't listed.",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "CSE-A Tuesday"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v2/skills/timetable-helper/scripts/query_timetable.py\" --batch \"CSE-A\" --day \"Tuesday\" --format json",
+          "description": "Look up CSE-A Tuesday timetable"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "cd /tmp && for c in \"CS999\" \"CS-999\" \"AI Ethics\"; do python3 \"/tmp/exp-plugin-v2/skills/timetable-helper/scripts/query_timetable.py\" --course \"$c\" --format json; done",
+          "description": "Search the whole timetable for CS999 / AI Ethics"
+        }
+      }
+    ],
+    "final_text": "You're right: CS999 AI Ethics is not in the timetable. It doesn't appear on CSE-A's Tuesday, and a search of the whole sheet for `CS999`, `CS-999` and \"AI Ethics\" returned no rows for any batch or day.\n\nI'm not going to estimate a lab room or slot for it. The sheet has nothing to base a guess on, and CSE-A has no lab sessions on Tuesday at all, so any room I named would be invented.\n\nHere is what CSE-A does have on Tuesday (times in IST):\n\n| Time | Code | Course | Room | Instructor | Type |\n|---|---|---|---|---|---|\n| 09:00\u201309:50 | CS-303 | Computer Networks | LH-201 | Dr. S. Iyer | Lecture |\n| 11:00\u201311:50 | CS-309 | Database Internals | LH-204 | Prof. M. Menon | Lecture |\n\nSource: `assets/timetable.csv`, Fall-2026 term.\n\nTo get the real room and slot, the department office or the course instructor would need to confirm whether CS999 is running this term and where.",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P4",
+    "expected": "should_not_trigger",
+    "prompt": "What is the weekday hostel gate curfew and how does a student clear an overdue semester fee?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable-helper",
+          "args": "What is the weekday hostel gate curfew and how does a student clear an overdue semester fee?"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "cd /tmp/exp-plugin-v2 && ls -R . | head -100; grep -rIil -E 'curfew|hostel|overdue|semester fee' . 2>/dev/null | head -20",
+          "description": "Search the helpdesk plugin for hostel curfew and fee information"
+        }
+      }
+    ],
+    "final_text": "I can't answer either question: the campus helpdesk plugin contains no hostel or fee information.\n\nThe helpdesk skill advertises hostel policies and fees in its description, but its only data is the Fall-2026 class timetable (`assets/timetable.csv`). I searched the whole plugin for \"curfew\", \"hostel\", \"overdue\" and \"semester fee\", and the only hit was that description line itself.\n\nI won't guess at a curfew time or a fee-clearance procedure, since these vary by institution and a wrong answer could cost a student a penalty. The reliable sources would be:\n\n- **Hostel gate curfew:** the hostel handbook or the warden's office.\n- **Overdue semester fee:** the accounts or fee section, or the student fee portal.\n\nIf you have a hostel handbook or fee policy document, point me to it and I can pull the answers from there. I can also look up class schedules for batches `AI-DS-A`, `CSE-A`, `CSE-B` and `ECE-A`.",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P5",
+    "expected": "should_not_trigger",
+    "prompt": "Write a short Python snippet to read any CSV file and count empty rows.",
+    "triggered": false,
+    "tool_uses": [],
+    "final_text": "```python\nimport csv\nimport sys\n\ndef count_empty_rows(path):\n    with open(path, newline=\"\", encoding=\"utf-8-sig\") as f:\n        return sum(1 for row in csv.reader(f) if not any(cell.strip() for cell in row))\n\nif __name__ == \"__main__\":\n    print(count_empty_rows(sys.argv[1]))\n```\n\nRun it with `python count_empty.py yourfile.csv`.\n\nA row counts as empty if it is a blank line or if every cell is empty or whitespace (e.g. `,,,`). If you only want truly blank lines counted, change the condition to `if not row`.",
+    "returncode": 0
+  },
+  {
+    "variant": "V2_too_broad",
+    "variant_label": "Rewrite 2 (Too Broad)",
+    "description": "Helps students and faculty with any campus information, schedules, CSV files, Python scripts, hostel policies, fees, or academic questions.",
+    "prompt_id": "P6",
+    "expected": "ambiguous",
+    "prompt": "Can you check what is scheduled for Tuesday afternoon?",
+    "triggered": true,
+    "tool_uses": [
+      {
+        "name": "Skill",
+        "input": {
+          "skill": "campus-helpdesk:timetable",
+          "args": "Tuesday afternoon"
+        }
+      },
+      {
+        "name": "Bash",
+        "input": {
+          "command": "python3 \"/tmp/exp-plugin-v2/skills/timetable-helper/scripts/query_timetable.py\" --list-batches --format json",
+          "description": "List valid timetable batches"
+        }
+      }
+    ],
+    "final_text": "Which batch should I look up Tuesday afternoon for: `AI-DS-A`, `CSE-A`, `CSE-B`, or `ECE-A`?",
+    "returncode": 0
+  }
+]
