@@ -20,7 +20,7 @@
 ## Global Policy Invariants (Verify Continuously)
 
 - [x] Verify zero banned/fabricated artifacts exist anywhere in repository (`@nimbus/mcp-skill-bridge`, `skill.config.yaml`, `2025-02-30`, `/worktree-merge`, `git worktree sync`, `NimbusSync`) via `grep -rnE --exclude-dir=node_modules --exclude-dir=docs "@nimbus/mcp-skill-bridge|skill\.config\.yaml|2025-02-30|/worktree-merge|worktree sync|NimbusSync" .` (expecting exit `1` / zero matches).
-- [ ] Verify strict Mock-Data-Only compliance: zero real student PII, zero real campus credentials/domains, and zero outbound `http://`/`https://` requests in runtime code (`mcp-server/src/`, `plugins/campus-helpdesk/`).
+- [x] Verify strict Mock-Data-Only compliance: zero real student PII, zero real campus credentials/domains, and zero outbound `http://`/`https://` requests in runtime code (`mcp-server/src/`, `plugins/campus-helpdesk/`).
 - [x] Verify zero hardcoded local machine paths (`/Users/`) exist inside `plugins/campus-helpdesk/` configs or scripts (`${CLAUDE_PLUGIN_ROOT}` or script-relative resolution only).
 
 ---
