@@ -1,0 +1,29 @@
+# Node / TypeScript build & dependency artifacts
+mcp-server/node_modules
+mcp-server/dist
+*.tsbuildinfo
+
+# OS & Editor clutter
+.DS_Store
+**/.DS_Store
+*.swp
+*.swo
+
+# Logs & temporary scratch workspaces
+*.log
+.claude/worktrees/
+tmp/
+scratch/
+.inspector/
+
+# Temporary PNG/preview renders & submission archives
+page-*.png
+*.preview.png
+preview/
+submission/*.zip
+
+# Explicitly keep self-contained plugin runtime artifacts tracked
+!plugins/campus-helpdesk/servers/
+!plugins/campus-helpdesk/servers/campus-helpdesk-mcp.mjs
+!plugins/campus-helpdesk/data/
+!plugins/campus-helpdesk/data/hostel_rules.md
