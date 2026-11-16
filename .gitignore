@@ -11,6 +11,8 @@ mcp-server/dist
 
 # Logs & temporary scratch workspaces
 *.log
+!evidence/logs/
+!evidence/logs/*.log
 .claude/worktrees/
 tmp/
 scratch/

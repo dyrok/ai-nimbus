@@ -175,5 +175,5 @@
 - [x] **5.2 Author Typst Report Content (Parts A–F)** (`report/main.typ` -> `report/Campus-Helpdesk-Toolchain-Report.pdf`, 22 pages, 294-word reflection, full Source List dated `2026-11-17`)
 - [x] **5.3 Visual Page & Accessibility Inspection of Compiled PDF** (Rendered all pages PNG at 144 ppi, fixed nested fence, `$GIT_COMMON_DIR` escape, Part C orphan lines, and Part E header stickiness; visually verified clean layout)
 - [x] **5.4 Standalone Prompt Log Deliverable** (`report/Prompt-Log.md` & `report/prompt-log.typ` -> `report/Prompt-Log.pdf`, `PL-01`–`PL-10` with 7 audited catches)
-- [ ] **5.5 Clean Repository `.zip` Archive Creation & Integrity Check**
-  - Package clean `.zip` archive and extract into temporary directory to verify `unzip -tq`, `validate --strict`, unit tests, hook tests, and bundled MCP stdio probe before ticking `[x]`.
+- [x] **5.5 Clean Repository `.zip` Archive Creation & Integrity Check**
+  - Packaged clean `submission/ai-nimbus-repo.zip` via `git archive` (zero `node_modules/`, `dist/`, `.DS_Store`, or `.git/` bloat), plus standalone submission copies `submission/Neel-Prabir-Singh-150096725058-Report.pdf` and `submission/Neel-Prabir-Singh-150096725058-Prompt-Log.{pdf,md}`; extracted archive into temporary directory and verified `unzip -tq`, `validate --strict` (x3), `unittest` (`15/15`), `test_protect_data.sh` (`22/22`), and bundled `campus-helpdesk-mcp.mjs` stdio execution.

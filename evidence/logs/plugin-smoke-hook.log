@@ -1,0 +1,31 @@
+TOOL_USE: Read {"file_path": "/Users/ns/code/ai-nimbus/plugins/campus-helpdesk/data/protected/fee_ledger_master.json"}
+TOOL_RESULT: is_error= None 1	{
+2	  "schema_version": "1.0.0",
+3	  "synthetic_fixture": true,
+4	  "term": "Fall-2026",
+5	  "currency": "INR",
+6	  "notice": "100% synthetic mock fee ledger snapshot for campus-helpdesk testing; read-only protected artifact.",
+7	  "records": [
+8	    {
+9	      "student_id": "STU-2026-001",
+10	    
+TOOL_USE: Write {"file_path": "/Users/ns/code/ai-nimbus/plugins/campus-helpdesk/data/protected/fee_ledger_master.json", "content": "{\n  \"schema_version\": \"1.0.0\",\n  \"synthetic_fixture\": true,\n  \"term\": \"F
+HOOK_EVENT: hook_started PreToolUse PreToolUse:Write 
+HOOK_EVENT: hook_response PreToolUse PreToolUse:Write {
+  "hookSpecificOutput": {
+    "hookEventName": "PreToolUse",
+    "permissionDecision": "deny",
+    "permissionDecisionReason": "[PADLOCK] Protected campus ledger guard: writes to 'data/protected/' are blocked. Draft proposed changes under 'proposals/' for registrar review instead."
+  }
+}
+
+TOOL_RESULT: is_error= True PreToolUse:Write hook error: [PADLOCK] Protected campus ledger guard: writes to 'data/protected/' are blocked. Draft proposed changes under 'proposals/' for registrar review instead.
+ASSISTANT: The write was blocked by a hook. Exact message:
+
+```
+PreToolUse:Write hook error: [PADLOCK] Protected campus ledger guard: writes to 'data/protected/' are blocked. Draft proposed changes under 'proposals/' for registrar review instead.
+```
+
+`plugins/campus-helpdesk/data/protected/fee_ledger_master.json` is unchanged, and I touched no other file. I only read the ledger before the single attempted write, which would have added `"audited": true` as a top-level field after `notice`.
+
+Stopping here as instructed.
