@@ -1,0 +1,28 @@
+batch,day,start_time,end_time,course_code,course_title,session_type,room,instructor,credits,term
+CSE-A,Monday,09:00,09:50,CS-301,Distributed Systems,LECTURE,LH-204,Dr. A. Kulkarni,4,Fall-2026
+CSE-A,Monday,10:00,10:50,CS-305,Compiler Design,LECTURE,LH-102,Prof. R. Nair,4,Fall-2026
+CSE-A,Monday,14:00,16:50,CS-301L,Distributed Systems Lab,LAB,LAB-3B,Dr. A. Kulkarni,2,Fall-2026
+CSE-A,Tuesday,09:00,09:50,CS-303,Computer Networks,LECTURE,LH-201,Dr. S. Iyer,4,Fall-2026
+CSE-A,Tuesday,11:00,11:50,CS-309,Database Internals,LECTURE,LH-204,Prof. M. Menon,3,Fall-2026
+CSE-A,Wednesday,10:00,10:50,CS-301,Distributed Systems,LECTURE,LH-204,Dr. A. Kulkarni,4,Fall-2026
+CSE-A,Wednesday,14:00,15:50,CS-305T,Compiler Design Tutorial,TUTORIAL,TR-12,Prof. R. Nair,1,Fall-2026
+CSE-A,Thursday,09:00,09:50,CS-303,Computer Networks,LECTURE,LH-201,Dr. S. Iyer,4,Fall-2026
+CSE-A,Thursday,14:00,16:50,CS-303L,Computer Networks Lab,LAB,NET-LAB-1,Dr. S. Iyer,2,Fall-2026
+CSE-A,Friday,10:00,10:50,CS-309,Database Internals,LECTURE,LH-204,Prof. M. Menon,3,Fall-2026
+CSE-B,Monday,09:00,09:50,CS-303,Computer Networks,LECTURE,LH-202,Dr. S. Iyer,4,Fall-2026
+CSE-B,Monday,11:00,11:50,CS-309,Database Internals,LECTURE,LH-205,Prof. M. Menon,3,Fall-2026
+CSE-B,Tuesday,10:00,10:50,CS-301,Distributed Systems,LECTURE,LH-204,Dr. A. Kulkarni,4,Fall-2026
+CSE-B,Tuesday,14:00,16:50,CS-301L,Distributed Systems Lab,LAB,LAB-3A,Dr. A. Kulkarni,2,Fall-2026
+CSE-B,Wednesday,09:00,09:50,CS-305,Compiler Design,LECTURE,LH-102,Prof. R. Nair,4,Fall-2026
+CSE-B,Thursday,11:00,11:50,CS-301,Distributed Systems,LECTURE,LH-204,Dr. A. Kulkarni,4,Fall-2026
+CSE-B,Friday,09:00,09:50,CS-305,Compiler Design,LECTURE,LH-102,Prof. R. Nair,4,Fall-2026
+ECE-A,Monday,10:00,10:50,EC-301,Digital Signal Processing,LECTURE,EC-101,Dr. P. Deshpande,4,Fall-2026
+ECE-A,Tuesday,09:00,09:50,EC-304,VLSI System Design,LECTURE,EC-103,Prof. K. Rao,4,Fall-2026
+ECE-A,Wednesday,14:00,16:50,EC-301L,DSP Hardware Lab,LAB,DSP-LAB-2,Dr. P. Deshpande,2,Fall-2026
+ECE-A,Thursday,10:00,10:50,EC-306,Embedded Microcontrollers,LECTURE,EC-101,Prof. V. Joshi,3,Fall-2026
+ECE-A,Friday,11:00,11:50,EC-304,VLSI System Design,LECTURE,EC-103,Prof. K. Rao,4,Fall-2026
+AI-DS-A,Monday,09:00,09:50,AI-302,Statistical Machine Learning,LECTURE,AI-201,Dr. N. Bose,4,Fall-2026
+AI-DS-A,Tuesday,11:00,11:50,AI-304,Information Retrieval,LECTURE,AI-202,Prof. T. Bansal,3,Fall-2026
+AI-DS-A,Wednesday,10:00,10:50,AI-302,Statistical Machine Learning,LECTURE,AI-201,Dr. N. Bose,4,Fall-2026
+AI-DS-A,Thursday,14:00,16:50,AI-302L,Applied ML Studio,LAB,AI-GPU-1,Dr. N. Bose,2,Fall-2026
+AI-DS-A,Friday,10:00,10:50,AI-306,Data Engineering Pipelines,LECTURE,AI-201,Prof. T. Bansal,3,Fall-2026
