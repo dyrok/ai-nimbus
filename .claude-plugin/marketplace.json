@@ -7,14 +7,14 @@
   },
   "metadata": {
     "description": "Nimbus Labs Campus Helpdesk plugin catalog",
-    "version": "0.1.0"
+    "version": "1.0.0"
   },
   "plugins": [
     {
       "name": "campus-helpdesk",
       "source": "./plugins/campus-helpdesk",
       "description": "Campus Helpdesk Agent bundling deterministic timetable skill, protected-data guard hooks, and campus stdio MCP server",
-      "version": "0.1.0",
+      "version": "1.0.0",
       "author": {
         "name": "Nimbus Labs",
         "email": "engineering@nimbuslabs.edu"

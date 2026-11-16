@@ -37259,8 +37259,8 @@ var GetFeeStatusInputSchema = external_exports.object({
   )
 }).strict();
 function resolveServerVersion() {
-  if ("0.2.0".length > 0) {
-    return "0.2.0";
+  if ("1.0.0".length > 0) {
+    return "1.0.0";
   }
   try {
     const moduleDir = path2.dirname(fileURLToPath2(import.meta.url));
