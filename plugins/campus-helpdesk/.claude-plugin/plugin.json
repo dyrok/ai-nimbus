@@ -1,7 +1,7 @@
 {
   "name": "campus-helpdesk",
-  "version": "0.2.0-mcp",
-  "description": "Campus Helpdesk Agent plugin featuring the bundled campus-helpdesk-mcp stdio MCP server (get_timetable, get_fee_status, campus://hostel-rules)",
+  "version": "0.2.0",
+  "description": "Campus Helpdesk Agent plugin bundling the timetable-helper skill, hardened PreToolUse path-traversal guard hooks protecting data/protected/, and the campus-helpdesk-mcp stdio MCP server (get_timetable, get_fee_status, campus://hostel-rules)",
   "author": {
     "name": "Nimbus Labs",
     "email": "engineering@nimbuslabs.edu"
@@ -12,6 +12,7 @@
     "timetable",
     "mcp",
     "helpdesk",
-    "stdio-mcp"
+    "stdio-mcp",
+    "security-hooks"
   ]
 }

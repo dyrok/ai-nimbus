@@ -1,0 +1,43 @@
+{
+  "schema_version": "1.0.0",
+  "synthetic_fixture": true,
+  "notice": "Synthetic internal campus hostel role directory using mock 4-digit intercom extensions only. Zero real PII, phone numbers, or credentials.",
+  "roster": [
+    {
+      "escalation_tier": 1,
+      "hostel_block": "Block-A (North Wing)",
+      "duty_role": "Resident Hostel Warden — Block A",
+      "intercom_ext": "ext-4101",
+      "campus_desk_code": "DESK-HA-01",
+      "shift_ist": "08:00-20:00",
+      "scope": "Curfew pass sign-off and room maintenance escalation"
+    },
+    {
+      "escalation_tier": 1,
+      "hostel_block": "Block-B (East Wing)",
+      "duty_role": "Resident Hostel Warden — Block B",
+      "intercom_ext": "ext-4102",
+      "campus_desk_code": "DESK-HB-01",
+      "shift_ist": "08:00-20:00",
+      "scope": "Visitor badge exceptions and electrical appliance inspection"
+    },
+    {
+      "escalation_tier": 2,
+      "hostel_block": "All Residential Blocks",
+      "duty_role": "Night Duty Security Supervisor",
+      "intercom_ext": "ext-4200",
+      "campus_desk_code": "DESK-NIGHT-01",
+      "shift_ist": "20:00-08:00",
+      "scope": "After-curfew emergency gate clearance and medical escort dispatch"
+    },
+    {
+      "escalation_tier": 3,
+      "hostel_block": "Central Administration",
+      "duty_role": "Chief Hostel Operations Officer",
+      "intercom_ext": "ext-4900",
+      "campus_desk_code": "DESK-CHIEF-01",
+      "shift_ist": "09:00-18:00",
+      "scope": "Disciplinary review appeals and fee-hold hostel exceptions"
+    }
+  ]
+}
